@@ -1,0 +1,21 @@
+{
+    "name": "solilokiam/async-event-dispatcher",
+    "description": "An asynchronous event dispatcher for symfony",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Miquel Company Rodriguez",
+            "email": "miquel@solilokiam.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "symfony/event-dispatcher": "2.5.*"
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "*",
+        "phpunit/phpunit": "4.2.*",
+        "phpmd/phpmd": "dev-master",
+        "fabpot/php-cs-fixer": "@stable"
+    }
+}
