@@ -10,7 +10,8 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "videlalvaro/php-amqplib": "2.2.*"
+        "videlalvaro/php-amqplib": "2.2.*",
+        "jms/serializer": "*"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "*",
