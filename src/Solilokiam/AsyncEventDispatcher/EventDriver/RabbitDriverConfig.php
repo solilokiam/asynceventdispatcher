@@ -16,6 +16,7 @@ class RabbitDriverConfig
     private $username;
     private $password;
     private $serializerFormat;
+    private $maxMessageNumber;
 
     /**
      * @param mixed $username
@@ -95,5 +96,21 @@ class RabbitDriverConfig
     public function getSerializerFormat()
     {
         return $this->serializerFormat;
+    }
+
+    /**
+     * @param mixed $maxMessageNumber
+     */
+    public function setMaxMessageNumber($maxMessageNumber)
+    {
+        $this->maxMessageNumber = $maxMessageNumber;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMaxMessageNumber()
+    {
+        return $this->maxMessageNumber;
     }
 } 

@@ -9,7 +9,7 @@
 namespace Solilokiam\AsyncEventDispatcher\Tests;
 
 
-class AsyncEventDispatcherObserverTest extends \PHPUnit_Framework_TestCase
+class AsyncEventDispatcherConsumerTest extends \PHPUnit_Framework_TestCase
 {
     public function testConsume()
     {

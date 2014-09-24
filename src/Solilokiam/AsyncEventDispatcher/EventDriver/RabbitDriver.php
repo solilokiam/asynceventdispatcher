@@ -20,15 +20,12 @@ class RabbitDriver implements EventDriverInterface
 
     protected $config;
 
-    protected $callback;
-
     protected $consumedMessages = 0;
 
-    function __construct(RabbitDriverConfig $config, Serializer $serializer, $callback)
+    function __construct(RabbitDriverConfig $config, Serializer $serializer)
     {
         $this->config = $config;
         $this->serializer = $serializer;
-        $this->callback = $callback;
     }
 
 
@@ -40,19 +37,17 @@ class RabbitDriver implements EventDriverInterface
     {
         $serializedEvent = $this->serializer->serialize($eventName,$this->config->getSerializerFormat());
 
-        $connection = new AMQPConnection($this->config->getHost(),$this->config->getPort(),$this->config->getUsername(),$this->config->getPassword());
-        $channel = $connection->channel();
-        $channel->exchange_declare($eventName,'fanout',false, false, false);
-        $msg = new AMQPMessage($serializedEvent);
-        $channel->basic_publish($msg,$this->config->getExchangeName());
+        $channel = $this->getPublishChannel($eventName);
 
-        // TODO: Implement publish() method.
+        $msg = new AMQPMessage($serializedEvent);
+
+        $channel->basic_publish($msg,$this->config->getExchangeName());
     }
 
     /**
      * @return AsyncEvent
      */
-    public function consume($eventName,$messageNumber)
+    public function consume($eventName, $eventCallback)
     {
         $consumerTag = md5(time());
         $connection = new AMQPConnection($this->config->getHost(),$this->config->getPort(),$this->config->getUsername(),$this->config->getPassword());
@@ -60,9 +55,10 @@ class RabbitDriver implements EventDriverInterface
         $channel->exchange_declare($eventName,'fanout',false, false, false);
         list($queue_name, ,) = $channel->queue_declare("", false, false, true, false);
         $channel->queue_bind($queue_name, 'logs');
-        $channel->basic_consume($queue_name, $consumerTag, false, true, false, false, array($this,'consumeMessage'));
+        $channel->basic_consume($queue_name, $consumerTag, false, true, false, false, $eventCallback);
+
         while(count($channel->callbacks)) {
-            if($this->consumedMessages >= $messageNumber)
+            if($this->consumedMessages >= $this->config->getMaxMessageNumber())
             {
                 $channel->basic_cancel($consumerTag);
             }
@@ -72,12 +68,15 @@ class RabbitDriver implements EventDriverInterface
         $connection->close();
     }
 
-    public function consumeMessage(AMQPMessage $msg)
+    /**
+     * @param $eventName
+     * @return \PhpAmqpLib\Channel\AMQPChannel
+     */
+    protected function getPublishChannel($eventName)
     {
-        $this->consumedMessages++;
-
-        $event = $this->serializer->deserialize($msg->body,'Solilokiam\AsyncEventDispatcher\AsyncEvent',$this->config->getSerializerFormat());
-
-        call_user_func($this->callable,$event);
+        $connection = new AMQPConnection($this->config->getHost(), $this->config->getPort(), $this->config->getUsername(), $this->config->getPassword());
+        $channel = $connection->channel();
+        $channel->exchange_declare($eventName, 'fanout', false, false, false);
+        return $channel;
     }
 } 

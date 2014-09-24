@@ -17,7 +17,7 @@ use Solilokiam\AsyncEventDispatcher\EventDriver\EventDriverInterface;
  *
  * @author Miquel Company Rodriguez <miquel@solilokiam.com>
  */
-class AsyncEventDispatcherObserver
+class AsyncEventDispatcherConsumer
 {
     /**
      * @var EventDriver\EventDriverInterface
@@ -28,7 +28,7 @@ class AsyncEventDispatcherObserver
      */
     protected $eventListenerManager;
 
-    private $consumed = 0;
+    protected $eventName;
 
     /**
      * @param EventDriverInterface $eventDriver
@@ -36,33 +36,31 @@ class AsyncEventDispatcherObserver
      */
     function __construct(
         EventDriverInterface $eventDriver,
-        AsyncEventDispatcherListenerManagerInterface $eventListenerManager
+        AsyncEventDispatcherListenerManagerInterface $eventListenerManager,
+        $eventName
     )
     {
         $this->eventDriver = $eventDriver;
         $this->eventListenerManager = $eventListenerManager;
+        $this->eventName = $eventName;
     }
 
     /**
      * @param $eventName
      * @param $messagesNumber
      */
-    public function consume($eventName, $messagesNumber)
+    public function activateConsumer($messagesNumber)
     {
-        while (true) {
-            $listeners = $this->eventListenerManager->getListeners($eventName);
-            $event = $this->eventDriver->consume($eventName);
+        $this->eventDriver->consume(array($this,'consume'),$messagesNumber);
+    }
 
-            foreach ($listeners as $listener) {
-                call_user_func($listener, $event, $eventName, $this);
-                if ($event->isPropagationStopped()) {
-                    break;
-                }
-            }
+    public function consume(AsyncEvent $event)
+    {
+        $listeners = $this->eventListenerManager->getListeners($this->eventName);
 
-            $this->consumed++;
-
-            if ($this->consumed >= $messagesNumber) {
+        foreach ($listeners as $listener) {
+            call_user_func($listener, $event, $this->eventName, $this);
+            if ($event->isPropagationStopped()) {
                 break;
             }
         }

@@ -22,5 +22,5 @@ interface EventDriverInterface
     /**
      * @return AsyncEvent
      */
-    public function consume($eventName,$messageNumber);
+    public function consume($eventName, $eventCallback);
 } 
