@@ -113,4 +113,4 @@ class RabbitDriverConfig
     {
         return $this->maxMessageNumber;
     }
-} 
+}

@@ -42,4 +42,4 @@ class AsyncEvent
         return $this->propagationStopped;
     }
 
-} 
+}

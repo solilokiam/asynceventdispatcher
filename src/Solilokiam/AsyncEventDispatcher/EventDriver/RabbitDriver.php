@@ -79,4 +79,4 @@ class RabbitDriver implements EventDriverInterface
         $channel->exchange_declare($eventName, 'fanout', false, false, false);
         return $channel;
     }
-} 
+}
