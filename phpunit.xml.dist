@@ -8,7 +8,7 @@
         >
     <testsuites>
         <testsuite name="Solilokiam Async EventDispatcher Component Test Suite">
-            <directory>./Tests/</directory>
+            <directory>tests</directory>
         </testsuite>
     </testsuites>
 
