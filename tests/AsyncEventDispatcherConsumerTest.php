@@ -8,12 +8,26 @@
 
 namespace Solilokiam\AsyncEventDispatcher\Tests;
 
+use Mockery as m;
+use Solilokiam\AsyncEventDispatcher\AsyncEventDispatcherConsumer;
 
 class AsyncEventDispatcherConsumerTest extends \PHPUnit_Framework_TestCase
 {
-    public function testConsume()
+    protected function tearDown()
     {
-        $this->assertTrue(true);
+        m::close();
     }
+
+    public function testActivateConsume()
+    {
+        $eventDriverMock = m::mock('Solilokiam\AsyncEventDispatcher\EventDriver\EventDriverInterface');
+        $eventDriverMock->shouldReceive('consume')->times(1)->with(m::type('callable'),10);
+
+        $eventListenerManagerMock = m::mock('Solilokiam\AsyncEventdispatcher\AsyncEventDispatcherListenerManager');
+
+        $asyncEventDispatcherConsumer = new AsyncEventDispatcherConsumer($eventDriverMock,$eventListenerManagerMock,'foo.event');
+        $asyncEventDispatcherConsumer->activateConsumer(10);
+    }
+
 }
  
