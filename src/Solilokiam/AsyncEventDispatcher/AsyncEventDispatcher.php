@@ -24,7 +24,7 @@ class AsyncEventDispatcher implements AsyncEventDispatcherInterface
      */
     public function dispatch($eventName, AsyncEvent $event = null)
     {
-        if ($event == null) {
+        if ($event === null) {
             $event = new AsyncEvent();
         }
 
