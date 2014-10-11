@@ -11,7 +11,7 @@
     "minimum-stability": "dev",
     "require": {
         "videlalvaro/php-amqplib": "2.2.*",
-        "jms/serializer": "dev-master"
+        "jms/serializer": "0.17.*@dev"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "dev-master",
