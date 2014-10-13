@@ -28,7 +28,11 @@ class AsyncEventDispatcherListenerManager implements AsyncEventDispatcherListene
     public function getListeners($eventName = null)
     {
         if (null !== $eventName) {
-            return $this->listeners[$eventName];
+            if (array_key_exists($eventName, $this->listeners)) {
+                return $this->listeners[$eventName];
+            } else {
+                return array();
+            }
         }
 
         return array_filter($this->listeners);

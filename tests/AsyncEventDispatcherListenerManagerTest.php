@@ -31,6 +31,12 @@ class AsyncEventDispatcherListenerTest extends \PHPUnit_Framework_TestCase
         unset($this->listener);
     }
 
+    public function testEmptyGetListener()
+    {
+        $listeners = $this->eventListener->getListeners(self::event1);
+        $this->assertTrue(is_array($listeners));
+    }
+
 
     public function testAddListener()
     {
