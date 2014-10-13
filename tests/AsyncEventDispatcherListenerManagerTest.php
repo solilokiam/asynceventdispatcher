@@ -13,8 +13,8 @@ use Solilokiam\AsyncEventDispatcher\AsyncEventDispatcherListenerManager;
 
 class AsyncEventDispatcherListenerTest extends \PHPUnit_Framework_TestCase
 {
-    private $listener;
-    private $eventListener;
+    protected $listener;
+    protected $eventListener;
 
     const event1 = 'event1';
     const event2 = 'event2';
