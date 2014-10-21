@@ -17,7 +17,7 @@ Add following lines to your `composer.json` file:
       ...
       "solilokiam/async-event-dispatcher": "dev-master"
     },
-``
+```
 
 How do you dispatch events?
 ---------------------------
