@@ -91,7 +91,7 @@ class RabbitDriverConfig
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getSerializerFormat()
     {

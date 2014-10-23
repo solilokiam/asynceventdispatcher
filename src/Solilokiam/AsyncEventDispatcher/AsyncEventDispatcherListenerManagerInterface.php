@@ -22,6 +22,7 @@ interface AsyncEventDispatcherListenerManagerInterface
      *
      * @param $eventName The event to listen on
      * @param callable $listener The listener
+     * @return void
      */
     public function addListener($eventName, Callable $listener);
 
@@ -46,6 +47,7 @@ interface AsyncEventDispatcherListenerManagerInterface
      *
      * @param $eventName The event to remove the listener from
      * @param callable $listener The listener to remove
+     * @return void
      */
     public function removeListener($eventName, Callable $listener);
 }
