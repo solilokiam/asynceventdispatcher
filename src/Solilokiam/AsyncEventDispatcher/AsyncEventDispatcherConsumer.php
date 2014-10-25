@@ -34,7 +34,7 @@ class AsyncEventDispatcherConsumer
      * @param EventDriverInterface $eventDriver
      * @param AsyncEventDispatcherListenerManagerInterface $eventListenerManager
      */
-    function __construct(
+    public function __construct(
         EventDriverInterface $eventDriver,
         AsyncEventDispatcherListenerManagerInterface $eventListenerManager,
         $eventName
@@ -51,7 +51,7 @@ class AsyncEventDispatcherConsumer
      */
     public function activateConsumer($messagesNumber)
     {
-        $this->eventDriver->consume(array($this,'consume'),$messagesNumber);
+        $this->eventDriver->consume(array($this, 'consume'), $messagesNumber);
     }
 
     public function consume(AsyncEvent $event)

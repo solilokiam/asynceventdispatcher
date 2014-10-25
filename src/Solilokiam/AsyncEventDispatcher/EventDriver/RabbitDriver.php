@@ -22,7 +22,7 @@ class RabbitDriver implements EventDriverInterface
 
     protected $consumedMessages = 0;
 
-    function __construct(RabbitDriverConfig $config, Serializer $serializer)
+    public function __construct(RabbitDriverConfig $config, Serializer $serializer)
     {
         $this->config = $config;
         $this->serializer = $serializer;
@@ -35,7 +35,7 @@ class RabbitDriver implements EventDriverInterface
      */
     public function publish($eventName, AsyncEvent $event)
     {
-        $serializedEvent = $this->serializer->serialize($eventName,$this->config->getSerializerFormat());
+        $serializedEvent = $this->serializer->serialize($eventName, $this->config->getSerializerFormat());
 
         $channel = $this->getPublishChannel($eventName);
 
@@ -50,7 +50,8 @@ class RabbitDriver implements EventDriverInterface
      */
     protected function getPublishChannel($eventName)
     {
-        $connection = new AMQPConnection($this->config->getHost(), $this->config->getPort(), $this->config->getUsername(), $this->config->getPassword());
+        $connection = new AMQPConnection($this->config->getHost(), $this->config->getPort(),
+            $this->config->getUsername(), $this->config->getPassword());
         $channel = $connection->channel();
         $channel->exchange_declare($eventName, 'fanout', false, false, false);
         return $channel;
@@ -62,7 +63,8 @@ class RabbitDriver implements EventDriverInterface
     public function consume($eventName, $eventCallback)
     {
         $consumerTag = md5(time());
-        $connection = new AMQPConnection($this->config->getHost(), $this->config->getPort(), $this->config->getUsername(), $this->config->getPassword());
+        $connection = new AMQPConnection($this->config->getHost(), $this->config->getPort(),
+            $this->config->getUsername(), $this->config->getPassword());
         $channel = $connection->channel();
         $channel->exchange_declare($eventName, 'fanout', false, false, false);
         list($queue_name, ,) = $channel->queue_declare("", false, false, true, false);

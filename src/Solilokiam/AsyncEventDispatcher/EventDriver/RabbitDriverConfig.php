@@ -19,6 +19,14 @@ class RabbitDriverConfig
     private $maxMessageNumber;
 
     /**
+     * @return mixed
+     */
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    /**
      * @param mixed $username
      */
     public function setUsername($username)
@@ -29,9 +37,9 @@ class RabbitDriverConfig
     /**
      * @return mixed
      */
-    public function getUsername()
+    public function getPort()
     {
-        return $this->username;
+        return $this->port;
     }
 
     /**
@@ -45,9 +53,9 @@ class RabbitDriverConfig
     /**
      * @return mixed
      */
-    public function getPort()
+    public function getHost()
     {
-        return $this->port;
+        return $this->host;
     }
 
     /**
@@ -61,9 +69,9 @@ class RabbitDriverConfig
     /**
      * @return mixed
      */
-    public function getHost()
+    public function getPassword()
     {
-        return $this->host;
+        return $this->password;
     }
 
     /**
@@ -75,11 +83,11 @@ class RabbitDriverConfig
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getPassword()
+    public function getSerializerFormat()
     {
-        return $this->password;
+        return $this->serializerFormat;
     }
 
     /**
@@ -91,11 +99,11 @@ class RabbitDriverConfig
     }
 
     /**
-     * @return string
+     * @return mixed
      */
-    public function getSerializerFormat()
+    public function getMaxMessageNumber()
     {
-        return $this->serializerFormat;
+        return $this->maxMessageNumber;
     }
 
     /**
@@ -104,13 +112,5 @@ class RabbitDriverConfig
     public function setMaxMessageNumber($maxMessageNumber)
     {
         $this->maxMessageNumber = $maxMessageNumber;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getMaxMessageNumber()
-    {
-        return $this->maxMessageNumber;
     }
 }

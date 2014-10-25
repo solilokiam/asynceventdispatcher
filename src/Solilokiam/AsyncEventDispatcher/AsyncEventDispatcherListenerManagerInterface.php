@@ -20,7 +20,7 @@ interface AsyncEventDispatcherListenerManagerInterface
     /**
      * Adds an event listener that listen to specified events
      *
-     * @param $eventName The event to listen on
+     * @param string $eventName The event to listen on
      * @param callable $listener The listener
      * @return void
      */
@@ -45,7 +45,7 @@ interface AsyncEventDispatcherListenerManagerInterface
     /**
      * Removes an event listener from the specified event
      *
-     * @param $eventName The event to remove the listener from
+     * @param string $eventName The event to remove the listener from
      * @param callable $listener The listener to remove
      * @return void
      */

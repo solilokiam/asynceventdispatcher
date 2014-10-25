@@ -23,6 +23,14 @@ class AsyncEventDispatcherListenerManager implements AsyncEventDispatcherListene
     private $listeners = array();
 
     /**
+     * @see AsyncEventDispatcherListenerManagerInterface::hasListeners
+     */
+    public function hasListeners($eventName = null)
+    {
+        return (bool)count($this->getListeners($eventName));
+    }
+
+    /**
      * @see AsyncEventDispatcherListenerManagerInterface::getListeners
      */
     public function getListeners($eventName = null)
@@ -36,14 +44,6 @@ class AsyncEventDispatcherListenerManager implements AsyncEventDispatcherListene
         }
 
         return array_filter($this->listeners);
-    }
-
-    /**
-     * @see AsyncEventDispatcherListenerManagerInterface::hasListeners
-     */
-    public function hasListeners($eventName = null)
-    {
-        return (bool)count($this->getListeners($eventName));
     }
 
     /**

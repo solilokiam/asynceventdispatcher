@@ -13,7 +13,7 @@ class AsyncEventDispatcher implements AsyncEventDispatcherInterface
 {
     protected $eventDriver;
 
-    function __construct(EventDriverInterface $eventDriver)
+    public function __construct(EventDriverInterface $eventDriver)
     {
         $this->eventDriver = $eventDriver;
     }
