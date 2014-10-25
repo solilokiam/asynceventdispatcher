@@ -30,7 +30,7 @@ class RabbitDriver implements EventDriverInterface
 
 
     /**
-     * @param $eventName
+     * @param string $eventName
      * @param AsyncEvent $event
      */
     public function publish($eventName, AsyncEvent $event)
@@ -45,7 +45,7 @@ class RabbitDriver implements EventDriverInterface
     }
 
     /**
-     * @param $eventName
+     * @param string $eventName
      * @return \PhpAmqpLib\Channel\AMQPChannel
      */
     protected function getPublishChannel($eventName)
