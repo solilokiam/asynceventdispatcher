@@ -6,7 +6,6 @@ tools:
     php_changetracking: true
     sensiolabs_security_checker: true
     php_mess_detector: true
-    external_code_coverage: true
 filter:
     excluded_paths:
         - 'tests/*'
