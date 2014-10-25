@@ -10,12 +10,12 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "videlalvaro/php-amqplib": "2.2.*",
+        "videlalvaro/php-amqplib": "2.4.*",
         "jms/serializer": "0.17.*@dev"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "dev-master",
-        "phpunit/phpunit": "4.2.*",
+        "phpunit/phpunit": "4.3.*",
         "phpmd/phpmd": "dev-master",
         "fabpot/php-cs-fixer": "@stable",
         "mockery/mockery": "dev-master"
