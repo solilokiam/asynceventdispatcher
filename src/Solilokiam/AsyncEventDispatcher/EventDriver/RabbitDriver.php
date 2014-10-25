@@ -41,31 +41,7 @@ class RabbitDriver implements EventDriverInterface
 
         $msg = new AMQPMessage($serializedEvent);
 
-        $channel->basic_publish($msg,$this->config->getExchangeName());
-    }
-
-    /**
-     * @return AsyncEvent
-     */
-    public function consume($eventName, $eventCallback)
-    {
-        $consumerTag = md5(time());
-        $connection = new AMQPConnection($this->config->getHost(),$this->config->getPort(),$this->config->getUsername(),$this->config->getPassword());
-        $channel = $connection->channel();
-        $channel->exchange_declare($eventName,'fanout',false, false, false);
-        list($queue_name, ,) = $channel->queue_declare("", false, false, true, false);
-        $channel->queue_bind($queue_name, 'logs');
-        $channel->basic_consume($queue_name, $consumerTag, false, true, false, false, $eventCallback);
-
-        while(count($channel->callbacks)) {
-            if($this->consumedMessages >= $this->config->getMaxMessageNumber())
-            {
-                $channel->basic_cancel($consumerTag);
-            }
-            $channel->wait();
-        }
-        $channel->close();
-        $connection->close();
+        $channel->basic_publish($msg, $eventName);
     }
 
     /**
@@ -78,5 +54,28 @@ class RabbitDriver implements EventDriverInterface
         $channel = $connection->channel();
         $channel->exchange_declare($eventName, 'fanout', false, false, false);
         return $channel;
+    }
+
+    /**
+     * @return AsyncEvent
+     */
+    public function consume($eventName, $eventCallback)
+    {
+        $consumerTag = md5(time());
+        $connection = new AMQPConnection($this->config->getHost(), $this->config->getPort(), $this->config->getUsername(), $this->config->getPassword());
+        $channel = $connection->channel();
+        $channel->exchange_declare($eventName, 'fanout', false, false, false);
+        list($queue_name, ,) = $channel->queue_declare("", false, false, true, false);
+        $channel->queue_bind($queue_name, 'logs');
+        $channel->basic_consume($queue_name, $consumerTag, false, true, false, false, $eventCallback);
+
+        while (count($channel->callbacks)) {
+            if ($this->consumedMessages >= $this->config->getMaxMessageNumber()) {
+                $channel->basic_cancel($consumerTag);
+            }
+            $channel->wait();
+        }
+        $channel->close();
+        $connection->close();
     }
 }
