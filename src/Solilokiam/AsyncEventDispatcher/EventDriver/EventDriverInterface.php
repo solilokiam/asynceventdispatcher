@@ -14,8 +14,9 @@ interface EventDriverInterface
 {
 
     /**
-     * @param $eventName
+     * @param string $eventName
      * @param AsyncEvent $event
+     * @return void
      */
     public function publish($eventName, AsyncEvent $event);
 
