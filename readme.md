@@ -3,10 +3,16 @@ AsyncEventDispatcher Component
 
 [![Build Status](https://travis-ci.org/solilokiam/asynceventdispatcher.svg?branch=master)](https://travis-ci.org/solilokiam/asynceventdispatcher)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/ac193ca5-c894-47ac-b1c7-12c2d9e31124/mini.png)](https://insight.sensiolabs.com/projects/ac193ca5-c894-47ac-b1c7-12c2d9e31124)
+[![Dependency Status](https://www.versioneye.com/user/projects/544bc44497ae388a46000120/badge.svg?style=flat)](https://www.versioneye.com/user/projects/544bc44497ae388a46000120)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/solilokiam/asynceventdispatcher/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/solilokiam/asynceventdispatcher/?branch=master)
 
 
 This component is an async event dispatcher based on the Symfony's event dispatcher component but in a fire and forget way.
 Right now it needs Rabbitmq to work but if you use another queue system it's really easy to extend and use.
+
+Warning
+-------
+This code is not ready for production. This is still a Work in progress, things may change a lot over time.
 
 Installation
 ------------
