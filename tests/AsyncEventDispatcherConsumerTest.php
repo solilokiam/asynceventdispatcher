@@ -16,7 +16,7 @@ class AsyncEventDispatcherConsumerTest extends \PHPUnit_Framework_TestCase
     public function testActivateConsume()
     {
         $eventDriverMock = m::mock('Solilokiam\AsyncEventDispatcher\EventDriver\EventDriverInterface');
-        $eventDriverMock->shouldReceive('consume')->times(1)->with(m::type('callable'), 10);
+        $eventDriverMock->shouldReceive('consume')->times(1)->with('foo.event', m::type('callable'), 10);
 
         $eventListenerManagerMock = m::mock('Solilokiam\AsyncEventDispatcher\AsyncEventDispatcherListenerManager');
 

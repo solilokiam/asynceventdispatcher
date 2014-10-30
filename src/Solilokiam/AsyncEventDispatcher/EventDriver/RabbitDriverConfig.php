@@ -18,6 +18,12 @@ class RabbitDriverConfig
     private $serializerFormat;
     private $maxMessageNumber;
 
+    function __construct()
+    {
+        $this->serializerFormat = 'json';
+    }
+
+
     /**
      * @return mixed
      */

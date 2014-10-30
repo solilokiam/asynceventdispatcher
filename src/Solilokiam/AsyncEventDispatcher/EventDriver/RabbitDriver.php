@@ -9,7 +9,7 @@
 namespace Solilokiam\AsyncEventDispatcher\EventDriver;
 
 
-use JMS\Serializer\Serializer;
+use JMS\Serializer\SerializerInterface;
 use PhpAmqpLib\Connection\AMQPConnection;
 use PhpAmqpLib\Message\AMQPMessage;
 use Solilokiam\AsyncEventDispatcher\AsyncEvent;
@@ -22,7 +22,7 @@ class RabbitDriver implements EventDriverInterface
 
     protected $consumedMessages = 0;
 
-    public function __construct(RabbitDriverConfig $config, Serializer $serializer)
+    public function __construct(RabbitDriverConfig $config, SerializerInterface $serializer)
     {
         $this->config = $config;
         $this->serializer = $serializer;
@@ -60,7 +60,7 @@ class RabbitDriver implements EventDriverInterface
     /**
      * @return AsyncEvent
      */
-    public function consume($eventName, $eventCallback)
+    public function consume($eventName, $eventCallback, $messageNumber)
     {
         $consumerTag = md5(time());
         $connection = new AMQPConnection($this->config->getHost(), $this->config->getPort(),
@@ -72,7 +72,7 @@ class RabbitDriver implements EventDriverInterface
         $channel->basic_consume($queue_name, $consumerTag, false, true, false, false, $eventCallback);
 
         while (count($channel->callbacks)) {
-            if ($this->consumedMessages >= $this->config->getMaxMessageNumber()) {
+            if ($this->consumedMessages >= $messageNumber) {
                 $channel->basic_cancel($consumerTag);
             }
             $channel->wait();
