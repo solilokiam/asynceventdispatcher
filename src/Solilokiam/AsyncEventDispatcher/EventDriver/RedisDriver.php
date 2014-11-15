@@ -36,6 +36,10 @@ class RedisDriver implements EventDriverInterface
 
         $serializedEvent = $this->serializer->serialize($event, $this->config->getSerializerFormat());
 
+        $message = new AsyncEventMessage(get_class($event), $serializedEvent);
+
+        $serializedMessage = $this->serializer->serialize($message, $this->config->getSerializerFormat());
+
         $client->lpush($this->getKey($eventName), $serializedEvent);
     }
 
@@ -48,10 +52,13 @@ class RedisDriver implements EventDriverInterface
         $processedMessages = 0;
 
         while (true) {
-            $message = $client->rpop($this->getKey($eventName));
+            $serializedMessage = $client->rpop($this->getKey($eventName));
+            $message = $this->serializer->deserialize($serializedMessage,
+                'Solilokiam\AsyncEventDispatcher\EventDriver\AsyncEventMessage', $this->config->getSerializerFormat());
 
-            if ($message !== null) {
-                $event = $this->serializer->deserialize($message, $this->config->getSerializerFormat());
+            if ($message->hasPlayload()) {
+                $event = $this->serializer->deserialize($message->getMessagePlayload(), $message->getEventClassName,
+                    $this->config->getSerializerFormat());
 
                 call_user_func($eventCallback, $event);
 
