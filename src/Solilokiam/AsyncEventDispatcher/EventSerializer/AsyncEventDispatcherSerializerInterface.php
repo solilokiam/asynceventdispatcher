@@ -19,7 +19,7 @@ interface AsyncEventDispatcherSerializerInterface
     /**
      * @param $serializedMessage
      * @param $format
-     * @return null|AsyncEvent
+     * @return null|object
      */
     public function deserialize($serializedMessage, $format);
 }
