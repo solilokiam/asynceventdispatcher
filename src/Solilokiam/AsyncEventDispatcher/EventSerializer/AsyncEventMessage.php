@@ -1,17 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: miquel
- * Date: 15/11/14
- * Time: 18:14
- */
 
-namespace Solilokiam\AsyncEventDispatcher\EventDriver;
+namespace Solilokiam\AsyncEventDispatcher\EventSerializer;
 
 
 /**
  * Class AsyncEventMessage
- * @package Solilokiam\AsyncEventDispatcher\EventDriver
+ * @package Solilokiam\AsyncEventDispatcher\EventSerializer
  */
 class AsyncEventMessage
 {
@@ -26,13 +20,20 @@ class AsyncEventMessage
     protected $messagePlayload;
 
     /**
+     * @var string
+     */
+    protected $messagePlayloadFormat;
+
+    /**
      * @param $eventClassName
      * @param $messagePlayload
+     * @param $messagePlayloadFormat
      */
-    function __construct($eventClassName, $messagePlayload)
+    function __construct($eventClassName, $messagePlayload, $messagePlayloadFormat)
     {
         $this->eventClassName = $eventClassName;
         $this->messagePlayload = $messagePlayload;
+        $this->messagePlayloadFormat = $messagePlayloadFormat;
     }
 
     /**
@@ -51,6 +52,18 @@ class AsyncEventMessage
         return $this->messagePlayload;
     }
 
+    /**
+     * @return string
+     */
+    public function getMessagePlayloadFormat()
+    {
+        return $this->messagePlayloadFormat;
+    }
+
+
+    /**
+     * @return bool
+     */
     public function hasPlayload()
     {
         return $this->messagePlayload !== null;

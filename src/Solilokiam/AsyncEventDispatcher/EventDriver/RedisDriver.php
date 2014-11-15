@@ -9,9 +9,9 @@
 namespace Solilokiam\AsyncEventDispatcher\EventDriver;
 
 
-use JMS\Serializer\SerializerInterface;
 use Predis\Client;
 use Solilokiam\AsyncEventDispatcher\AsyncEvent;
+use Solilokiam\AsyncEventDispatcher\EventSerializer\AsyncEventDispatcherSerializerInterface;
 
 class RedisDriver implements EventDriverInterface
 {
@@ -19,7 +19,7 @@ class RedisDriver implements EventDriverInterface
     protected $config;
     protected $serializer;
 
-    function __construct(RedisDriverConfig $config, SerializerInterface $serializer)
+    function __construct(RedisDriverConfig $config, AsyncEventDispatcherSerializerInterface $serializer)
     {
         $this->config = $config;
         $this->serializer = $serializer;
@@ -36,10 +36,6 @@ class RedisDriver implements EventDriverInterface
 
         $serializedEvent = $this->serializer->serialize($event, $this->config->getSerializerFormat());
 
-        $message = new AsyncEventMessage(get_class($event), $serializedEvent);
-
-        $serializedMessage = $this->serializer->serialize($message, $this->config->getSerializerFormat());
-
         $client->lpush($this->getKey($eventName), $serializedEvent);
     }
 
@@ -53,19 +49,16 @@ class RedisDriver implements EventDriverInterface
 
         while (true) {
             $serializedMessage = $client->rpop($this->getKey($eventName));
-            $message = $this->serializer->deserialize($serializedMessage,
-                'Solilokiam\AsyncEventDispatcher\EventDriver\AsyncEventMessage', $this->config->getSerializerFormat());
 
-            if ($message->hasPlayload()) {
-                $event = $this->serializer->deserialize($message->getMessagePlayload(), $message->getEventClassName,
-                    $this->config->getSerializerFormat());
+            $event = $this->serializer->deserialize($serializedMessage, $this->config->getSerializerFormat());
 
+            if ($event !== null) {
                 call_user_func($eventCallback, $event);
 
                 $processedMessages++;
             }
 
-            if ($processedMessages >= $message) {
+            if ($processedMessages >= $messageNumber) {
                 break;
             }
 
