@@ -37,6 +37,11 @@ class RedisDriver implements EventDriverInterface
         $client->lpush($this->getKey($eventName), $serializedEvent);
     }
 
+    protected function getKey($eventName)
+    {
+        return $this->config->getKeyPrefix() . '_' . $eventName;
+    }
+
     /**
      * @return AsyncEvent
      */
@@ -60,10 +65,5 @@ class RedisDriver implements EventDriverInterface
                 break;
             }
         }
-    }
-
-    protected function getKeyPrefix($eventName)
-    {
-        return $this->config->getKeyPrefix() . '_' . $eventName;
     }
 }
