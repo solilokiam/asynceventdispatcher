@@ -8,7 +8,6 @@
 
 namespace Solilokiam\AsyncEventDispatcher\EventDriver;
 
-
 class RedisDriverConfig
 {
     protected $host;
@@ -18,11 +17,10 @@ class RedisDriverConfig
     protected $keyPrefix;
     protected $serializerFormat;
 
-    function __construct()
+    public function __construct()
     {
         $this->serializerFormat = 'json';
     }
-
 
     /**
      * @param mixed $database
@@ -110,4 +108,4 @@ class RedisDriverConfig
 
         return $configArray;
     }
-} 
+}

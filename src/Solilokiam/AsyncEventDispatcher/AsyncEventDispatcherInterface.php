@@ -19,10 +19,10 @@ interface AsyncEventDispatcherInterface
      * Send an event message to the async event dispatcher observer.
      *
      * @param string $eventName The name of the event to dispatch. The name of
-     *                          the event is the name of the method that is
-     *                          invoked on listeners.
+     *                              the event is the name of the method that is
+     *                              invoked on listeners.
      * @param AsyncEvent $event The event to pass to the event handlers/listeners.
-     *                          If not supplied, an empty Event instance is created.
+     *                              If not supplied, an empty Event instance is created.
      *
      * @return Event|null
      *

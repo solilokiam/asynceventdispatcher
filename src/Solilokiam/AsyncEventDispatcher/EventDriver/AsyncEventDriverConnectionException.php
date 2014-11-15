@@ -8,8 +8,6 @@
 
 namespace Solilokiam\AsyncEventDispatcher\EventDriver;
 
-
 class AsyncEventDriverConnectionException extends \Exception
 {
-
-} 
+}

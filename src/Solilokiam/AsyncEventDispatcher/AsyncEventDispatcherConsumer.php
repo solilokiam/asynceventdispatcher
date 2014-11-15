@@ -8,7 +8,6 @@
 
 namespace Solilokiam\AsyncEventDispatcher;
 
-
 use Solilokiam\AsyncEventDispatcher\EventDriver\EventDriverInterface;
 
 /**
@@ -65,6 +64,4 @@ class AsyncEventDispatcherConsumer
             }
         }
     }
-
-
 }

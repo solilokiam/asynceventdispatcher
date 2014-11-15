@@ -2,7 +2,6 @@
 
 namespace Solilokiam\AsyncEventDispatcher\EventSerializer;
 
-
 use JMS\Serializer\SerializerInterface;
 
 /**
@@ -19,13 +18,13 @@ class AsyncEventDispatcherSerializer implements AsyncEventDispatcherSerializerIn
     /**
      * @param SerializerInterface $serializer
      */
-    function __construct(SerializerInterface $serializer)
+    public function __construct(SerializerInterface $serializer)
     {
         $this->serializer = $serializer;
     }
 
     /**
-     * @param AsyncEvent $event
+     * @param  AsyncEvent $event
      * @param $format
      * @return mixed
      */
@@ -57,6 +56,4 @@ class AsyncEventDispatcherSerializer implements AsyncEventDispatcherSerializerIn
             return null;
         }
     }
-
-
-} 
+}

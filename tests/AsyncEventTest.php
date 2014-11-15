@@ -6,8 +6,7 @@
  * Time: 21:43
  */
 
-namespace Solilokiam\AsyncEventDispatcher\Tests;
-
+namespace Solilokiam\AsyncEventDispatcher\tests;
 
 use Solilokiam\AsyncEventDispatcher\AsyncEvent;
 
@@ -18,7 +17,6 @@ class AsyncEventTest extends \PHPUnit_Framework_TestCase
         $event = new AsyncEvent();
         //By default propagation must be stopped
         $this->assertFalse($event->isPropagationStopped());
-
     }
 
     public function testStopPropagation()
@@ -28,4 +26,3 @@ class AsyncEventTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($event->isPropagationStopped());
     }
 }
- 

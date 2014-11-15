@@ -6,21 +6,14 @@
  * Time: 21:49
  */
 
-namespace Solilokiam\AsyncEventDispatcher\Tests;
+namespace Solilokiam\AsyncEventDispatcher\tests;
 
 use Mockery as m;
 use Solilokiam\AsyncEventDispatcher\AsyncEvent;
 use Solilokiam\AsyncEventDispatcher\AsyncEventDispatcher;
 
-
 class AsyncEventDispatcherTest extends \PHPUnit_Framework_TestCase
 {
-    protected function tearDown()
-    {
-        m::close();
-    }
-
-
     public function testDispatcher()
     {
         $event = new AsyncEvent();
@@ -43,5 +36,9 @@ class AsyncEventDispatcherTest extends \PHPUnit_Framework_TestCase
         $dispatcher = new AsyncEventDispatcher($eventDriverMock);
         $dispatcher->dispatch($eventName);
     }
+
+    protected function tearDown()
+    {
+        m::close();
+    }
 }
- 

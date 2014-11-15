@@ -2,7 +2,6 @@
 
 namespace Solilokiam\AsyncEventDispatcher\EventSerializer;
 
-
 /**
  * Class AsyncEventMessage
  * @package Solilokiam\AsyncEventDispatcher\EventSerializer
@@ -29,7 +28,7 @@ class AsyncEventMessage
      * @param $messagePlayload
      * @param $messagePlayloadFormat
      */
-    function __construct($eventClassName, $messagePlayload, $messagePlayloadFormat)
+    public function __construct($eventClassName, $messagePlayload, $messagePlayloadFormat)
     {
         $this->eventClassName = $eventClassName;
         $this->messagePlayload = $messagePlayload;
@@ -60,7 +59,6 @@ class AsyncEventMessage
         return $this->messagePlayloadFormat;
     }
 
-
     /**
      * @return bool
      */
@@ -68,6 +66,4 @@ class AsyncEventMessage
     {
         return $this->messagePlayload !== null;
     }
-
-
 }

@@ -8,7 +8,6 @@
 
 namespace Solilokiam\AsyncEventDispatcher;
 
-
 /**
  * The async event is the parent class for all classes containing event data.
  *
@@ -41,5 +40,4 @@ class AsyncEvent
     {
         return $this->propagationStopped;
     }
-
 }

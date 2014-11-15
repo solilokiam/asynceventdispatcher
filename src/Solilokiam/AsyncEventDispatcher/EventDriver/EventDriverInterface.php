@@ -12,10 +12,9 @@ use Solilokiam\AsyncEventDispatcher\AsyncEvent;
 
 interface EventDriverInterface
 {
-
     /**
-     * @param string $eventName
-     * @param AsyncEvent $event
+     * @param  string $eventName
+     * @param  AsyncEvent $event
      * @return void
      */
     public function publish($eventName, AsyncEvent $event);

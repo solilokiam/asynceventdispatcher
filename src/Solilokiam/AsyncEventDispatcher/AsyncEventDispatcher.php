@@ -18,7 +18,6 @@ class AsyncEventDispatcher implements AsyncEventDispatcherInterface
         $this->eventDriver = $eventDriver;
     }
 
-
     /**
      * @see AsyncEventDispatcher::dispatch
      */
@@ -30,5 +29,4 @@ class AsyncEventDispatcher implements AsyncEventDispatcherInterface
 
         $this->eventDriver->publish($eventName, $event);
     }
-
 }

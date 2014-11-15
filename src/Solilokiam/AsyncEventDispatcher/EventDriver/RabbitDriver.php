@@ -8,7 +8,6 @@
 
 namespace Solilokiam\AsyncEventDispatcher\EventDriver;
 
-
 use JMS\Serializer\SerializerInterface;
 use PhpAmqpLib\Connection\AMQPConnection;
 use PhpAmqpLib\Message\AMQPMessage;
@@ -28,7 +27,6 @@ class RabbitDriver implements EventDriverInterface
         $this->serializer = $serializer;
     }
 
-
     /**
      * @param string $eventName
      * @param AsyncEvent $event
@@ -45,7 +43,7 @@ class RabbitDriver implements EventDriverInterface
     }
 
     /**
-     * @param string $eventName
+     * @param  string $eventName
      * @return \PhpAmqpLib\Channel\AMQPChannel
      */
     protected function getPublishChannel($eventName)
@@ -54,6 +52,7 @@ class RabbitDriver implements EventDriverInterface
             $this->config->getUsername(), $this->config->getPassword());
         $channel = $connection->channel();
         $channel->exchange_declare($eventName, 'fanout', false, false, false);
+
         return $channel;
     }
 

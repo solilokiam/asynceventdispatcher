@@ -6,7 +6,7 @@
  * Time: 19:24
  */
 
-namespace Solilokiam\AsyncEventDispatcher\Tests;
+namespace Solilokiam\AsyncEventDispatcher\tests;
 
 use Mockery as m;
 use Solilokiam\AsyncEventDispatcher\AsyncEventDispatcherConsumer;
@@ -52,7 +52,7 @@ class AsyncEventDispatcherConsumerTest extends \PHPUnit_Framework_TestCase
 
         $eventListenerManagerMock->shouldReceive('getListeners')->times(1)->with('foo.event')->andReturn(array(
             $listener1,
-            $listener2
+            $listener2,
         ));
         $asyncEventMock = m::mock('Solilokiam\AsyncEventDispatcher\AsyncEvent');
         $asyncEventMock->shouldReceive('isPropagationStopped')->times(2)->andReturn(false);
@@ -79,7 +79,7 @@ class AsyncEventDispatcherConsumerTest extends \PHPUnit_Framework_TestCase
 
         $eventListenerManagerMock->shouldReceive('getListeners')->times(1)->with('foo.event')->andReturn(array(
             $listener1,
-            $listener2
+            $listener2,
         ));
         $asyncEventMock = m::mock('Solilokiam\AsyncEventDispatcher\AsyncEvent');
         $asyncEventMock->shouldReceive('isPropagationStopped')->times(1)->andReturn(true);
@@ -96,6 +96,4 @@ class AsyncEventDispatcherConsumerTest extends \PHPUnit_Framework_TestCase
     {
         m::close();
     }
-
 }
- 

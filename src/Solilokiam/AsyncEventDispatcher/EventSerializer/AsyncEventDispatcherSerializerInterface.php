@@ -1,7 +1,6 @@
 <?php
 namespace Solilokiam\AsyncEventDispatcher\EventSerializer;
 
-
 /**
  * Class AsyncEventDispatcherSerializer
  * @package Solilokiam\AsyncEventDispatcher\EventSerializer
@@ -9,7 +8,7 @@ namespace Solilokiam\AsyncEventDispatcher\EventSerializer;
 interface AsyncEventDispatcherSerializerInterface
 {
     /**
-     * @param AsyncEvent $event
+     * @param  AsyncEvent $event
      * @param $format
      * @return mixed
      */

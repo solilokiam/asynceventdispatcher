@@ -8,26 +8,24 @@
 
 namespace Solilokiam\AsyncEventDispatcher\EventDriver;
 
-
 use Predis\Client;
 use Solilokiam\AsyncEventDispatcher\AsyncEvent;
 use Solilokiam\AsyncEventDispatcher\EventSerializer\AsyncEventDispatcherSerializerInterface;
 
 class RedisDriver implements EventDriverInterface
 {
-
     protected $config;
     protected $serializer;
 
-    function __construct(RedisDriverConfig $config, AsyncEventDispatcherSerializerInterface $serializer)
+    public function __construct(RedisDriverConfig $config, AsyncEventDispatcherSerializerInterface $serializer)
     {
         $this->config = $config;
         $this->serializer = $serializer;
     }
 
     /**
-     * @param string $eventName
-     * @param AsyncEvent $event
+     * @param  string $eventName
+     * @param  AsyncEvent $event
      * @return void
      */
     public function publish($eventName, AsyncEvent $event)
@@ -61,7 +59,6 @@ class RedisDriver implements EventDriverInterface
             if ($processedMessages >= $messageNumber) {
                 break;
             }
-
         }
     }
 
@@ -69,5 +66,4 @@ class RedisDriver implements EventDriverInterface
     {
         return $this->config->getKeyPrefix() . '_' . $eventName;
     }
-
-} 
+}
