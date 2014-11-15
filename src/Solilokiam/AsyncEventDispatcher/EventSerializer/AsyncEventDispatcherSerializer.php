@@ -3,6 +3,7 @@
 namespace Solilokiam\AsyncEventDispatcher\EventSerializer;
 
 use JMS\Serializer\SerializerInterface;
+use Solilokiam\AsyncEventDispatcher\AsyncEvent;
 
 /**
  * Class AsyncEventDispatcherSerializer

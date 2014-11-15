@@ -1,6 +1,8 @@
 <?php
 namespace Solilokiam\AsyncEventDispatcher\EventSerializer;
 
+use Solilokiam\AsyncEventDispatcher\AsyncEvent;
+
 /**
  * Class AsyncEventDispatcherSerializer
  * @package Solilokiam\AsyncEventDispatcher\EventSerializer
