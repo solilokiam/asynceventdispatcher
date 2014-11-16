@@ -51,11 +51,7 @@ class AsyncEventDispatcherSerializer implements AsyncEventDispatcherSerializerIn
         $message = $this->serializer->deserialize($serializedMessage,
             'Solilokiam\AsyncEventDispatcher\EventSerializer\AsyncEventMessage', $format);
 
-        if ($message->hasPlayload()) {
-            return $this->serializer->deserialize($message->getMessagePlayload(), $message->getEventClassName(),
-                $message->getMessagePlayloadFormat());
-        } else {
-            return null;
-        }
+        return $this->serializer->deserialize($message->getMessagePlayload(), $message->getEventClassName(),
+            $message->getMessagePlayloadFormat());
     }
 }

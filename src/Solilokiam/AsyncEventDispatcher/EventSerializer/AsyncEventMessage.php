@@ -58,12 +58,4 @@ class AsyncEventMessage
     {
         return $this->messagePlayloadFormat;
     }
-
-    /**
-     * @return bool
-     */
-    public function hasPlayload()
-    {
-        return $this->messagePlayload !== null;
-    }
 }
