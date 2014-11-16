@@ -44,7 +44,7 @@ class AsyncEventDispatcherSerializer implements AsyncEventDispatcherSerializerIn
     /**
      * @param $serializedMessage
      * @param $format
-     * @return null|AsyncEvent
+     * @return object
      */
     public function deserialize($serializedMessage, $format)
     {
