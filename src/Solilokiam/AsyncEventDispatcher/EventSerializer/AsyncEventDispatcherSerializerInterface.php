@@ -12,7 +12,7 @@ interface AsyncEventDispatcherSerializerInterface
     /**
      * @param  AsyncEvent $event
      * @param $format
-     * @return mixed
+     * @return string
      */
     public function serialize(AsyncEvent $event, $format);
 

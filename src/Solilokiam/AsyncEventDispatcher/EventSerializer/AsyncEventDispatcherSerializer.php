@@ -28,7 +28,7 @@ class AsyncEventDispatcherSerializer implements AsyncEventDispatcherSerializerIn
     /**
      * @param  AsyncEvent $event
      * @param $format
-     * @return mixed
+     * @return string
      */
     public function serialize(AsyncEvent $event, $format)
     {
@@ -42,8 +42,8 @@ class AsyncEventDispatcherSerializer implements AsyncEventDispatcherSerializerIn
     }
 
     /**
-     * @param $serializedMessage
-     * @param $format
+     * @param string $serializedMessage
+     * @param string $format
      * @return object
      */
     public function deserialize($serializedMessage, $format)
