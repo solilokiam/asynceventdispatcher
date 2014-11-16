@@ -2,8 +2,9 @@
 
 namespace Solilokiam\AsyncEventDispatcher\EventSerializer;
 
-use JMS\Serializer\SerializerInterface;
+
 use Solilokiam\AsyncEventDispatcher\AsyncEvent;
+use Symfony\Component\Serializer\SerializerInterface;
 
 /**
  * Class AsyncEventDispatcherSerializer
