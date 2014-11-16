@@ -6,8 +6,7 @@
  * Time: 22:19
  */
 
-namespace Solilokiam\AsyncEventDispatcher\Tests;
-
+namespace Solilokiam\AsyncEventDispatcher\tests;
 
 use Solilokiam\AsyncEventDispatcher\AsyncEvent;
 
@@ -29,4 +28,4 @@ class AsyncEventListenerTest
 
         $e->stopPropagation();
     }
-} 
+}

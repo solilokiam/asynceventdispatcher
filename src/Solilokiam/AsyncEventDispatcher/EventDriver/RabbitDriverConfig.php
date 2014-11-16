@@ -8,7 +8,6 @@
 
 namespace Solilokiam\AsyncEventDispatcher\EventDriver;
 
-
 class RabbitDriverConfig
 {
     private $host;
@@ -17,6 +16,11 @@ class RabbitDriverConfig
     private $password;
     private $serializerFormat;
     private $maxMessageNumber;
+
+    public function __construct()
+    {
+        $this->serializerFormat = 'json';
+    }
 
     /**
      * @return mixed

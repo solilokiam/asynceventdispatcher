@@ -8,7 +8,7 @@ AsyncEventDispatcher Component
 
 
 This component is an async event dispatcher based on the Symfony's event dispatcher component but in a fire and forget way.
-Right now it needs Rabbitmq to work but if you use another queue system it's really easy to extend and use.
+Right now it needs Redis to work but if you use another queue system it's really easy to extend and use.
 
 Warning
 -------
@@ -59,9 +59,9 @@ class FooAsyncEvent extends AsyncEvent
 ```
 
 ```php
-$rabbitMqEventDriver = new RabbitDriver($rabbitConfig);
+$redirEventDriver = new RedisDriver($redisConfig);
 
-$asyncEventDispatcher = new AsyncEventDispatcher($rabbitMqEventDriver);
+$asyncEventDispatcher = new AsyncEventDispatcher($redisEventDriver);
 
 $fooEvent = new FooAsyncEvent();
 $fooEvent->setFoo('whatever');

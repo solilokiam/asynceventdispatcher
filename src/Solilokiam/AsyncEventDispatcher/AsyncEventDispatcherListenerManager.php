@@ -8,7 +8,6 @@
 
 namespace Solilokiam\AsyncEventDispatcher;
 
-
 /**
  * Class AsyncEventDispatcherListenerManager
  * @package Solilokiam\AsyncEventDispatcher
@@ -49,7 +48,7 @@ class AsyncEventDispatcherListenerManager implements AsyncEventDispatcherListene
     /**
      * @see AsyncEventDispatcherListenerManagerInterface::addListener
      */
-    public function addListener($eventName, Callable $listener)
+    public function addListener($eventName, callable $listener)
     {
         $this->listeners[$eventName][] = $listener;
     }
@@ -57,7 +56,7 @@ class AsyncEventDispatcherListenerManager implements AsyncEventDispatcherListene
     /**
      * @see AsyncEventDispatcherListenerManagerInterface::removeListener
      */
-    public function removeListener($eventName, Callable $listener)
+    public function removeListener($eventName, callable $listener)
     {
         if (!isset($this->listeners[$eventName])) {
             return;

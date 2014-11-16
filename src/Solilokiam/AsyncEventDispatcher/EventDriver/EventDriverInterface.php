@@ -12,10 +12,9 @@ use Solilokiam\AsyncEventDispatcher\AsyncEvent;
 
 interface EventDriverInterface
 {
-
     /**
-     * @param string $eventName
-     * @param AsyncEvent $event
+     * @param  string $eventName
+     * @param  AsyncEvent $event
      * @return void
      */
     public function publish($eventName, AsyncEvent $event);
@@ -23,5 +22,5 @@ interface EventDriverInterface
     /**
      * @return AsyncEvent
      */
-    public function consume($eventName, $eventCallback);
+    public function consume($eventName, $eventCallback, $messageNumber);
 }

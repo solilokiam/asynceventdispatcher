@@ -6,37 +6,22 @@
  * Time: 22:15
  */
 
-namespace Solilokiam\AsyncEventDispatcher\Tests;
-
+namespace Solilokiam\AsyncEventDispatcher\tests;
 
 use Solilokiam\AsyncEventDispatcher\AsyncEventDispatcherListenerManager;
 
-class AsyncEventDispatcherListenerTest extends \PHPUnit_Framework_TestCase
+class AsyncEventDispatcherListenerManagerTest extends \PHPUnit_Framework_TestCase
 {
-    protected $listener;
-    protected $eventListener;
-
     const event1 = 'event1';
     const event2 = 'event2';
-
-    protected function setUp()
-    {
-        $this->eventListener = new AsyncEventDispatcherListenerManager();
-        $this->listener = new AsyncEventListenerTest();
-    }
-
-    protected function tearDown()
-    {
-        unset($this->eventListener);
-        unset($this->listener);
-    }
+    protected $listener;
+    protected $eventListener;
 
     public function testEmptyGetListener()
     {
         $listeners = $this->eventListener->getListeners(self::event1);
         $this->assertTrue(is_array($listeners));
     }
-
 
     public function testAddListener()
     {
@@ -57,5 +42,16 @@ class AsyncEventDispatcherListenerTest extends \PHPUnit_Framework_TestCase
         $this->eventListener->removeListener(self::event1, array($this->listener, 'onEvent1'));
         $this->assertCount(0, $this->eventListener->getListeners(self::event1));
     }
+
+    protected function setUp()
+    {
+        $this->eventListener = new AsyncEventDispatcherListenerManager();
+        $this->listener = new AsyncEventListenerTest();
+    }
+
+    protected function tearDown()
+    {
+        unset($this->eventListener);
+        unset($this->listener);
+    }
 }
- 

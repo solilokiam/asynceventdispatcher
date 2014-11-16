@@ -8,7 +8,6 @@
 
 namespace Solilokiam\AsyncEventDispatcher;
 
-
 use Solilokiam\AsyncEventDispatcher\EventDriver\EventDriverInterface;
 
 /**
@@ -49,9 +48,9 @@ class AsyncEventDispatcherConsumer
      * @param $eventName
      * @param $messagesNumber
      */
-    public function activateConsumer($messagesNumber)
+    public function activateConsumer($messagesToConsume)
     {
-        $this->eventDriver->consume(array($this, 'consume'), $messagesNumber);
+        $this->eventDriver->consume($this->eventName, array($this, 'consume'), $messagesToConsume);
     }
 
     public function consume(AsyncEvent $event)
@@ -65,6 +64,4 @@ class AsyncEventDispatcherConsumer
             }
         }
     }
-
-
 }
